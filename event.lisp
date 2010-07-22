@@ -36,3 +36,8 @@
     nil))
 
 ;;;-------------------------------------------------------------------------
+
+(defun create-event-name (symbol)
+  (intern (concatenate 'string (symbol-name symbol) "-CHANGED") (symbol-package symbol)))
+
+;;;-------------------------------------------------------------------------
