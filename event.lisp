@@ -31,7 +31,7 @@
   (:method ((event event) &rest arguments)
     (with-slots (observers) event
       (mapcar #'(lambda (observer)
-		  (funcall observer arguments))
+		  (apply observer arguments))
 	      observers))
     nil))
 
