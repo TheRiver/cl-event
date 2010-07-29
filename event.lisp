@@ -13,27 +13,27 @@
 ;;;-------------------------------------------------------------------------
 
 (defgeneric add-observer (event observer)
-  (:documentation "Schedules the given observer to receive updates from the given event.")
+  (:documentation "Schedules the given observer to receive updates from the given event. Returns the observer.")
   (:method ((event event) observer)
     (with-slots (observers) event
       (push observer observers))
-    event))
+    observer))
 
 (defgeneric delete-observer (event observer &key test)
-  (:documentation "Removes the given observer from the event.")
+  (:documentation "Removes the given observer from the event. Returns the observer.")
   (:method ((event event) observer &key (test #'eql))
     (with-slots (observers) event
       (setf observers (delete observer observers :test test)))
-    event))
+    observer))
 
 (defgeneric fire-event (event &rest arguments)
-  (:documentation "Fires the given event.")
+  (:documentation "Fires the given event. Returns the event.")
   (:method ((event event) &rest arguments)
     (with-slots (observers) event
       (mapcar #'(lambda (observer)
 		  (apply observer arguments))
 	      observers))
-    nil))
+    event))
 
 ;;;-------------------------------------------------------------------------
 

@@ -4,6 +4,9 @@
   (:export #:event
 	   #:add-observer
 	   #:delete-observer
-	   #:fire-event)
+	   #:fire-event
+
+	   ;; macros
+	   #:insensitive)
   (:documentation "A package of various helper functions and macros."))
   
